@@ -11,6 +11,14 @@ function mostrar() {
         console.log (menu[i].producto + ": $" + menu[i].precio);
 
     }
+
+    function productosBaratos() {
+        let baratos = menu.filter (p => p.precio <=  50)
+
+    }
+  
+
+
 }
 
 function editaryBorrar() {
