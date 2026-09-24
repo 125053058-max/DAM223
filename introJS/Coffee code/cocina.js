@@ -22,37 +22,27 @@ function mostrar() {
     
     }
 
-    function productosBaratos() {
-        let baratos = menu.filter (p => p.precio <=  50)
-        console.log("Productos baratos: ");
-        for (let i = 0; i < baratos.length; i++) {}
-        console.log(baratos[i].producto + " $" + baratos[i].precio);
-    }
-
-    function productosCaros() {
-        let caros = menu.filter (p => p.precio <= 80 )
-        console.log("Productos Caros: ");
-        for (let i = 0; i < caros.length; i++) {}
-        console.log(caros[i].producto + "$" + baratos[i].precio);
-
-    }
-
-    function buscarBebidas() {
-        let bebidas = menu.filter(p => p.tipo == "bebidas");
-        console.log("Bebidas:");
-
-        for (let i = 0; i < bebidas.length; i++) {
-            console.log(bebidas[i].producto + ": $" + bebidas[i].precio);
-        }
-    }
-
+    /* parte dos */
     function buscarPostres(){
-        let postres = menu.filter(p => p.tipo == "postres");
-        console.log("Postres:");
+    let postres = menu.filter(p => p.tipo == "postres");
+    return postres.map(p => console.log(p.producto + ": $" + p.precio));
+        
+}
 
-        for (let i = 0; i < postres.length; i++) {}
-        console.log(postres[i].producto + ": $" + postres[i].precio);
-    }
+function buscarBebidas() {
+        let bebidas = menu.filter(p => p.tipo == "bebidas");
+        return bebidas.map(p => console.log(p.producto + ": $" + p.precio));
+}
+
+function productosBaratos() {
+        let baratos = menu.filter (p => p.precio <  80)
+        return baratos.map  (p => console.log(p.producto + " $" + p.precio));
+}
+
+function productosCaros() {
+        let caros = menu.filter (p => p.precio >= 80 )
+        return caros.map(p => console.log(p.producto + "$" + p.precio));
+}
 }
 
 mostrar();
