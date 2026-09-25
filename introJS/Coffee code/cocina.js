@@ -61,16 +61,10 @@ function prepararCafe(estado) {
         setTimeout(function() {
 
     if (estado == "correcto") {
-                 resolve
-("Café preparado de manera satisfactoria");
+                 resolve ({ nombre: nombre, precio, mensaje: "Cafe preparado correctamente"});
+} else {
+         reject("No se logró preparar el café");
 }
-    else if (estado == "error") {
-         reject("Error en cocina");
-}
-    else if (estado == "ingrediente") {
-                reject("Falta un ingrediente para preparar el café");
-            }
-
         }, 3000);
 
     });
@@ -78,5 +72,40 @@ function prepararCafe(estado) {
 }
 }
 
+function errorCocina(estado) {
+      return new Promise(function(resolve, reject) {
+        setTimeout(function() {
 
-module.exports = {menu, mostrar, editarProducto, agregarProducto, borrarProducto, productosBaratos, productosCaros, buscarBebidas, buscarPostres, prepararCafe};
+            if (estado == "error") {
+                reject("Error en cocina");
+            } else {
+                resolve("No hubo errores en cocina");
+
+            }
+
+            }, 3000);
+        });
+      }
+
+      function faltaIngrediente(estado) {
+
+        return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+
+                if (estado == "ingrediente") {
+                    reject("Falta un ingrediente para poder preparar el café");
+                    
+                    } else {
+                        resolve("Ingredientes disponibles");
+                    }
+                }, 300);
+            });
+        }
+      
+
+    
+    
+
+
+
+module.exports = {menu, mostrar, editarProducto, agregarProducto, borrarProducto, productosBaratos, productosCaros, buscarBebidas, buscarPostres, prepararCafe, errorCocina, faltaIngrediente};
