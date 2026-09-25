@@ -52,38 +52,40 @@ function productosCaros() {
         let caros = menu.filter (p => p.precio >= 80 )
         return caros.map(p => console.log(p.producto + "$" + p.precio));
 
-
+}
         /* Parte tres */
 
-function prepararCafe(estado) {
-    return new Promise(function(resolve, reject) {
+        function procesoCocina(nombreProd) {
+            const prod = menu.find(prodprocesado.producto.producto == nombreProd);
 
-        setTimeout(function() {
+            if(!prod) {
+                return Promise.reject("El producto no está en el menu");
+        
+            }
+            if(prod.estado == "errorC") {
+                   return errorCocina(prod.estado);
+            } else if (prod.estado == "faltaIngrediente"){
+              return faltaIngrediente(prod.estado);
+            } else {
+                return Promise.resolve("Producto en proceso correcto");
+            }
+            }
 
-    if (estado == "correcto") {
-                 resolve ({ nombre: nombre, precio, mensaje: "Cafe preparado correctamente"});
-} else {
-         reject("No se logró preparar el café");
-}
-        }, 3000);
 
-    });
-
-}
-}
-
+            
+   
 function errorCocina(estado) {
       return new Promise(function(resolve, reject) {
         setTimeout(function() {
 
-            if (estado == "error") {
+            if (estado == "errorC") {
                 reject("Error en cocina");
             } else {
                 resolve("No hubo errores en cocina");
 
             }
 
-            }, 3000);
+            }, 1000);
         });
       }
 
@@ -92,13 +94,13 @@ function errorCocina(estado) {
         return new Promise(function(resolve, reject) {
             setTimeout(function() {
 
-                if (estado == "ingrediente") {
+                if (estado == "faltaIngrediente") {
                     reject("Falta un ingrediente para poder preparar el café");
                     
                     } else {
                         resolve("Ingredientes disponibles");
                     }
-                }, 300);
+                }, 1000);
             });
         }
       
@@ -108,4 +110,5 @@ function errorCocina(estado) {
 
 
 
-module.exports = {menu, mostrar, editarProducto, agregarProducto, borrarProducto, productosBaratos, productosCaros, buscarBebidas, buscarPostres, prepararCafe, errorCocina, faltaIngrediente};
+module.exports = {menu, mostrar, editarProducto, agregarProducto, borrarProducto, productosBaratos,
+     productosCaros, buscarBebidas, buscarPostres, procesoCocina, errorCocina, faltaIngrediente};
