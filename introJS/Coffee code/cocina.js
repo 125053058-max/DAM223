@@ -1,5 +1,5 @@
-console.time ("cafeteria");
 
+/* parte uno */
 let menu = [
     {producto: "café", precio: 50},
     {producto: "moka frappuccino", precio: 70},
@@ -12,23 +12,32 @@ function mostrar() {
     
     }
 
+}
     function agregarProducto(nombre, precio) {
         menu.push({producto: nombre, precio});
     }
 
-    function editaryBorrar() {
-        menu[1].precio = 75;
-        menu.splice(0,1);
-    
+    function editarProducto(nombre, nuevoPrecio) {
+        let producto = menu.find(p => p.producto == nombre);
+
+        if (producto) {
+            producto.precio = nuevoPrecio;
+        }
+
     }
 
+    function borrarProducto(nombre) {
+        let posicion = menu.findIndex(p => p.producto == nombre);
+
+        if(posicion != -1) {
+            menu.splice(posicion, 1);
+        }
+    }
     /* parte dos */
     function buscarPostres(){
     let postres = menu.filter(p => p.tipo == "postres");
     return postres.map(p => console.log(p.producto + ": $" + p.precio));
-        
 }
-
 function buscarBebidas() {
         let bebidas = menu.filter(p => p.tipo == "bebidas");
         return bebidas.map(p => console.log(p.producto + ": $" + p.precio));
@@ -42,14 +51,32 @@ function productosBaratos() {
 function productosCaros() {
         let caros = menu.filter (p => p.precio >= 80 )
         return caros.map(p => console.log(p.producto + "$" + p.precio));
+
+
+        /* Parte tres */
+
+function prepararCafe(estado) {
+    return new Promise(function(resolve, reject) {
+
+        setTimeout(function() {
+
+    if (estado == "correcto") {
+                 resolve
+("Café preparado de manera satisfactoria");
+}
+    else if (estado == "error") {
+         reject("Error en cocina");
+}
+    else if (estado == "ingrediente") {
+                reject("Falta un ingrediente para preparar el café");
+            }
+
+        }, 3000);
+
+    });
+
 }
 }
 
-mostrar();
 
-productosBaratos();
-prodtouctosCaros(); 
-buscarBebidas();
-buscarPostres();
-
-module.exports = {menu, mostrar, editaryBorrar, agregarProducto, productosBaratos, productosCaros, buscarBebidas, buscarPostres};
+module.exports = {menu, mostrar, editarProducto, agregarProducto, borrarProducto, productosBaratos, productosCaros, buscarBebidas, buscarPostres, prepararCafe};
